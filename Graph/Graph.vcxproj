@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="dfs.c" />
     <ClCompile Include="main.c" />
+    <ClCompile Include="queue.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,3 +1,3 @@
-int visited[20];
-
-void DFS()
+//int visited[20];
+//
+//void DFS() {}

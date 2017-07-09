@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <limits.h>
+#include "queue.h"
 
 #define MaxVertexNum 50
-#define TRUE 1;
-
+#define TRUE 1
 // ÁÚ½Ó¾ØÕó
 typedef struct {
 	char vexs[MaxVertexNum];
@@ -116,7 +116,7 @@ void BFS(MGraph G, int i, int n) {
 	EnQueue(&Q, i);
 	while (!QueueEmpty(&Q))
 	{
-		K = DeQueue(&Q);
+		k = DeQueue(&Q);
 		for (j = 0; j < n; j++)
 		{
 			if (G.arcs[k][j] == 1 && !visited[j]) {
@@ -137,7 +137,7 @@ void BFS1(ALGraph G, int i, int n) {
 	int visited[20];
 	printf("v%d->", i);
 	visited[i] = 1;
-	EnQueue(&Q);
+	EnQueue(&Q,i);
 
 	while (!QueueEmpty(&Q))
 	{
