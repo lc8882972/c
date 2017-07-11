@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BSTree.h" />
     <ClInclude Include="SeqList.h" />
   </ItemGroup>
   <ItemGroup>

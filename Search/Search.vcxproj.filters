@@ -18,6 +18,9 @@
     <ClInclude Include="SeqList.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="BSTree.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.c">
