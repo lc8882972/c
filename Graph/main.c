@@ -22,7 +22,7 @@ typedef struct vnode {
 }VNode, Adjlist[MaxVertexNum];
 
 typedef Adjlist ALGraph;
-
+// ¾ØÕó
 void CreateMGraph(MGraph* G, int n, int e) {
 	int i, j, k, w;
 	scanf("%d,%d", &n, &e);
@@ -44,7 +44,7 @@ void CreateMGraph(MGraph* G, int n, int e) {
 		G->arcs[j][i] = w;
 	}
 }
-
+// Í¼ Á´±í
 void CreateGraph(ALGraph GL, int n, int e) {
 	int i, j, k;
 	EdgeNode * p;

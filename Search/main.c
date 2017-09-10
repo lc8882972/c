@@ -2,6 +2,7 @@
 #include "SeqList.h"
 #include "BSTree.h"
 
+// 二分查找算法
 int BinSearch(SeqList R, KeyType k, int low, int high)
 {
 	int mid;
