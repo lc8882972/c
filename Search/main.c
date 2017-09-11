@@ -1,8 +1,8 @@
-#include <stdio.h>
+﻿#include <stdio.h>
 #include "SeqList.h"
 #include "BSTree.h"
 
-// ���ֲ����㷨
+// 二分查找算法
 int BinSearch(SeqList R, KeyType k, int low, int high)
 {
 	int mid;
@@ -49,13 +49,14 @@ void BinInsert(SeqList R, KeyType key, DataType data, int n)
 			R[i + 1] = R[i];
 		}
 
-		R[inspace].data = data;
+		//R[inspace].data = data;
 		R[inspace].key = key;
 	}
 }
 
 BSTree InsertBST(BSTree * T, BSTNode * S) 
 {
+
 	BSTNode *f, *p = T;
 	while (p)
 	{
@@ -73,6 +74,8 @@ BSTree InsertBST(BSTree * T, BSTNode * S)
 		f->lchild = S;
 	else
 		f->rchild = S;
+
+	return T;
 }
 
 BSTree CreateBST() 
@@ -90,6 +93,8 @@ BSTree CreateBST()
 		T = InsertBST(T, s);
 		scanf("%d", &k);
 	}
+
+	return T;
 }
 
 BSTNode * SearchBST(BSTree tree, KeyTyke key)
@@ -97,21 +102,77 @@ BSTNode * SearchBST(BSTree tree, KeyTyke key)
 	if (tree == NULL || tree->key == key)
 		return tree;
 
-	if (tree->key < key)
+	if (key < tree->key )
 		return SearchBST(tree->lchild, key);
 	else
 		return SearchBST(tree->rchild, key);
 }
 
+//typedef struct {
+//	KeyType key;
+//	DataType data;
+//}NodeType;
+typedef NodeType HashTable[997];
+
+//hash 线性探查法
+int h(KeyType key, int m) 
+{
+	return key % m;
+}
+
+int HashSearch(HashTable HT, KeyType k, int m) 
+{
+	int d, temp;
+	d = h(k, m);
+	temp = d;
+
+	while (HT[d].key != -32768)
+	{
+		if (HT[d].key == k) 
+		{
+			return d;
+		}
+		else 
+		{
+			d = (d + 1) % m;
+		}
+
+		if (d == temp)
+			return -1;
+	}
+
+	return d;
+}
+
+int HashInsert(HashTable HT, NodeType s, int m) 
+{
+	int d;
+	d = HashSearch(HT, s.key, m);
+	if (d == -1) return -1;
+	else 
+	{
+		if (HT[d].key == s.key) return 0;
+		else
+		{
+			HT[d] = s;
+			return 1;
+		}
+	}
+}
 int main()
 {
-	SeqList arr = { 0,13,25,36,42,48,56,64,69,78,85,92 };
+	SeqList arr = { {0,0},{13,0},{25,0},{36,0},{42,0},{48,0},{56,0},{64,0},{69,0},{78,0},{85,0},{92,0} };
+
 
 	int index = BinSearch(arr, 42, 1, 11);
 
 	printf("%d\n", index);
 
-	index = BinSearch(arr, 80, 1, 11);
+	//index = BinSearch(arr, 80, 1, 11);
 
-	printf("%d\n", index);
+	//printf("%d\n", index);
+
+	BSTree tree = CreateBST();
+
+	BSTNode *n = SearchBST(tree, 53);
 }

@@ -3,7 +3,7 @@ typedef int KeyTyke ;
 typedef int DataTyke;
 typedef struct node {
 	KeyTyke key;
-	DataTyke data;
+	//DataTyke data;
 	struct node *lchild, *rchild;
 }BSTNode;
 

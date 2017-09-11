@@ -1,31 +1,37 @@
 #include <stdio.h>
 #include <limits.h>
 #include "queue.h"
-
-#define MaxVertexNum 50
+#include "SeqStack.h"
+#define MaxVertexNum 50 //顶点最大数
 #define TRUE 1
 // 邻接矩阵
 typedef struct {
-	char vexs[MaxVertexNum];
-	int arcs[MaxVertexNum][MaxVertexNum];
+	char vexs[MaxVertexNum];  // 顶点数组 V(G)
+	int arcs[MaxVertexNum][MaxVertexNum]; //邻接矩阵 
 }MGraph;
+
+typedef int VRType;
+typedef struct {
+	char ver;
+	VRType lowcost;
+} minedge[MaxVertexNum];
 
 // 邻接表
 typedef struct node {
-	int adjvex;
-	struct  node * next;
+	int adjvex;// 顶点序号
+	struct  node * next; // 指向下条边的指针
 }EdgeNode;
 
 typedef struct vnode {
-	char vertex;
-	EdgeNode * link;
-}VNode, Adjlist[MaxVertexNum];
+	char vertex; // 顶点域
+	EdgeNode * link; // 边表头指针
+}VNode, Adjlist[MaxVertexNum]; //邻接表
 
-typedef Adjlist ALGraph;
+typedef Adjlist ALGraph; // 定义为图类型
 // 矩阵
 void CreateMGraph(MGraph* G, int n, int e) {
 	int i, j, k, w;
-	scanf("%d,%d", &n, &e);
+	scanf("%d,%d", &n, &e); // 读入顶点数，边数
 	for (i = 0; i < n; i++)
 	{
 		scanf("%c", &G->vexs[i]);
@@ -57,9 +63,10 @@ void CreateGraph(ALGraph GL, int n, int e) {
 
 	for (k = 0; k < e; k++)
 	{
+		// 0，3 0，4
 		scanf("%d,%d", &i, &j);
 		p = (EdgeNode *)malloc(sizeof(EdgeNode));
-		p->adjvex = j;
+		p->adjvex = j; //2 //3
 		p->next = GL[i].link;
 		GL[i].link = p;
 
@@ -78,7 +85,7 @@ void DFS(MGraph G, int i, int n)
 	int j;
 	printf("v%d->", i);
 	visited[i] = 1;
-	for (j = 0; i < n; n++)
+	for (j = 0; j < n; n++)
 	{
 		if (G.arcs[i][j] == 1 && !visited[j])
 			DFS(G, j, n);
@@ -154,10 +161,81 @@ void BFS1(ALGraph G, int i, int n) {
 			}
 
 			p = p->next;
+
 		}
 	}
 }
 
+// 普瑞姆算法
+void Prim(MGraph G, char u, int n) 
+{
+	int k, v, j;
+	//k = Vtxnum(G, u);
+
+	//for (v = 0; v < n; v++)
+	//{
+	//	if (v != k) 
+	//	{
+	//		minedge[v].ver = u;
+	//		minedge[v].lowcost = G.arcs[k][v];
+	//	}
+	//}
+	//minedge[k].lowcost = 0;
+
+
+}
+
+//拓扑排序
+void TopuSort(ALGraph G, int n) 
+{
+	int i, j, m = 0;
+	int inde[20];
+	SeqStack S;
+	EdgeNode *p;
+	for ( i = 0; i < n; i++)
+	{
+		inde[i] = 0;
+	}
+	for (i = 0; i < n; i++)
+	{
+		p = G[i].link;
+		while (p)
+		{
+			inde[p->adjvex] ++;
+			p = p->next;
+		}
+	}
+
+	InitStack(&S);
+
+	for (i = 0; i < 0; i++)
+	{
+		if (inde[i] == 0)
+			push(&S, i);
+	}
+
+	while (!StackEmpty(&S))
+	{
+		i = Pop(&S);
+		printf("v%d", i);
+		m++;
+		p = G[i].link;
+		while (p)
+		{
+			j = p->adjvex;
+			inde[j] --;
+
+			if (inde[j] == 0)
+				push(&S, j);
+			p = p->next;
+		}
+	}
+
+	if (m < n) 
+	{
+		printf("The Graph has acycle!");
+	}
+}
 int main()
 {
 	MGraph g;

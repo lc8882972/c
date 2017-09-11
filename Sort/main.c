@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include "seqlist.h"
 #include "LinkList.h"
-// 插入排序
+
+// 直接插入排序
 void InsertSort(SeqList R, int n)
 {
 	int i, j;
